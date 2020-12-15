@@ -138,7 +138,7 @@ plt.plot(z, ang(z, H0, Obh2, Och2), 'k-', linewidth='4', label='scipy.integrate.
 plt.plot(z,ang_quad(z, H0, Obh2, Och2), 'r:', linewidth='4', label='scipy.integrate.quad')
 plt.plot(z,bao2d(z, H0, Obh2, Och2), 'b--', linewidth='4', label='F2py')
 
-plt.ylabel(r'$\mu(z)$')
+plt.ylabel(r'$\theta(z)$')
 plt.xlabel(r'$z$')
 plt.tick_params(which='major',axis='x', length=14, width=4, direction='in')
 plt.tick_params(which='minor',axis='x', length=7, width=2, direction='in')
