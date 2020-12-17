@@ -40,7 +40,7 @@ Cf2py  intent(out) ang
         y = 1.0 / a - 1.0
 	
 
-        R=(3.0*Obh2*(100.0/H0)**2)/(4.0*Og/a)
+        R=(3.0*Obh2*(100.0/H0)**2)/(4.0*Og*a)
         cs=light_speed/(sqrt(3.0*(1.0+R)))/a/a
         fun = cs*model(y, H0, Obh2, Och2)
         
