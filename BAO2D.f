@@ -5,7 +5,7 @@
         external model,fun
 
 !##############FORTRAN#####################
-!# f2py -c -m fib3 fib3.f
+!# f2py -c -m BAO2D BAO2D.f
 !########################################
 
 Cf2py  intent(in)  H0, Obh2, Och2
