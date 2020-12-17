@@ -103,7 +103,7 @@ def DA(z, H0, Obh2, Och2):
 DA = np.vectorize(DA)
 
 @jit
-def ang_quad(z, H0, Obh2, Och2):###Params
+def ang_quad(z, H0, Obh2, Och2):
     b1 = 0.313 * (Obh2 + Och2) ** (-0.419) * (1.0 + 0.607 * (Obh2 + Och2) ** (0.674))
     b2 = 0.238 * (Obh2 + Och2) ** (0.223)
 
@@ -128,7 +128,7 @@ def ang(z, H0, Obh2, Och2):
 
 
 
-H0, Obh2, Och2 = 67.4, 0.0222, 0.120
+H0, Obh2, Och2 = 67.4, 0.0224, 0.120
 
 z = np.linspace(0.22, 2.25, 2000)
 
