@@ -28,7 +28,7 @@ N_INTERP = 2000 #number of step for interpolation
 def H(a, H0, Obh2, Och2):
     h = H0 / 100.0
     Om = (Obh2 + Och2) / h ** 2
-    Or = (2.469e-5) * (h ** (-2.0)) * (1.0 + ((7.0 / 8.0) * (4.0 / 11.0) ** (4.0 / 3.0)) * 3.046e0)
+    Or = (2.469e-5) * (h ** (-2.0)) * (1.0 + ((7.0 / 8.0) * (4.0 / 11.0) ** (4.0 / 3.0)) * 3.046)
 
     return H0*np.sqrt((Om*(a)**(-3) + Or*(a)**(-4) + 1.0 - Om - Or))
 
@@ -69,8 +69,8 @@ def rs(a, H0, Obh2, Och2):
     Ob = Obh2* (100.0/H0)**(2.0)
     Og = 2.469e-5 * (100.0/H0)**(2.0)
 
-    R = (3.e0 * Ob) / (4.e0 * Og * aa)
-    cs = light_speed / np.sqrt(3.e0 * (1.e0 + R)) / aa / aa
+    R = (3.0 * Ob) / (4.0 * Og * aa)
+    cs = light_speed / np.sqrt(3.0 * (1.0 + R)) / aa / aa
     integ =cs/H(aa, H0, Obh2, Och2)
 
 
@@ -86,9 +86,9 @@ def fun(z, H0, Obh2, Och2):
     Ob = Obh2* (100.0/H0)**(2.0)
     Og = 2.469e-5 * (100.0/H0)**(2.0)
 
-    R=(3.0*Obh2* (100.0/H0)**(2.0))/(4.0*2.469e-5* (100.0/H0)**2*(1.e0+z))
+    R=(3.0*Ob)/(4.0*Og*(1.0+z))
 
-    cs=light_speed/np.sqrt(3.0*(1.e0+R))
+    cs=light_speed/np.sqrt(3.0*(1.0+R))
 
     return cs*model(z, H0, Obh2, Och2)
 
@@ -104,11 +104,11 @@ DA = np.vectorize(DA)
 
 @jit
 def ang_quad(z, H0, Obh2, Och2):###Params
-    b1 = 0.313e0 * (Obh2 + Och2) ** (-0.419e0) * (1.e0 + 0.607 * (Obh2 + Och2) ** (0.674e0))
-    b2 = 0.238e0 * (Obh2 + Och2) ** (0.223e0)
+    b1 = 0.313 * (Obh2 + Och2) ** (-0.419) * (1.0 + 0.607 * (Obh2 + Och2) ** (0.674))
+    b2 = 0.238 * (Obh2 + Och2) ** (0.223)
 
-    zd = (1291e0 * (Obh2 + Och2) ** (0.251e0) * (1.e0 + b1 * (Obh2) ** (b2))) / (
-		1.e0 + 0.659e0 * (Obh2 + Och2) ** (0.828))
+    zd = (1291.0 * (Obh2 + Och2) ** (0.251) * (1.0 + b1 * (Obh2) ** (b2))) / (
+		1.0 + 0.659 * (Obh2 + Och2) ** (0.828))
 
     return rss(zd,H0, Obh2, Och2)/((1.0+z)*DA(z,H0, Obh2, Och2))
 
@@ -116,10 +116,11 @@ def ang_quad(z, H0, Obh2, Och2):###Params
 @jit
 def ang(z, H0, Obh2, Och2):
     a = 1.0/(1.0+z)
-    b1 = 0.313e0*(Obh2+Och2)**(-0.419e0)*(1.e0 + 0.607*(Obh2+Och2)**(0.674e0))
-    b2 = 0.238e0*(Obh2+Och2)**(0.223e0)
+    b1 = 0.313 * (Obh2 + Och2) ** (-0.419) * (1.0 + 0.607 * (Obh2 + Och2) ** (0.674))
+    b2 = 0.238 * (Obh2 + Och2) ** (0.223)
 
-    zd = (1291e0*(Obh2+Och2)**(0.251e0)*(1.e0+b1*(Obh2)**(b2)))/(1.e0+0.659e0*(Obh2+Och2)**(0.828))
+    zd = (1291.0 * (Obh2 + Och2) ** (0.251) * (1.0 + b1 * (Obh2) ** (b2))) / (
+		1.0 + 0.659 * (Obh2 + Och2) ** (0.828))
     ad = 1.0/(1.0+zd)
 
     return rs(ad, H0, Obh2, Och2)/chi(a, H0, Obh2, Och2)
