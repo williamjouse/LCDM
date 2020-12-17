@@ -62,7 +62,7 @@ def model(z, H0, Obh2, Och2):
 
 @jit
 def DL(z_hel, z_cmb, H0, Obh2, Och2):
-    return (light_speed *(1.0 + z_hel)* quad(model, 0.0, z_cmb, args=(H0, Obh2, Och2))[0])
+    return light_speed *(1.0 + z_hel)* quad(model, 0.0, z_cmb, args=(H0, Obh2, Och2))[0]
 
 DL = np.vectorize(DL)
 
@@ -77,7 +77,7 @@ def mu_teo(z_hel, z_cmb, H0, Obh2, Och2):
 
 
 
-H0, Obh2, Och2 = 67.4, 0.0222, 0.120 
+H0, Obh2, Och2 = 67.4, 0.0224, 0.120 
 
 z = np.linspace(np.min(zcmb), np.max(zcmb), 2000)
 
