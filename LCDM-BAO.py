@@ -29,7 +29,6 @@ def H(a, H0, Obh2, Och2):
     h = H0 / 100.0
     Om = (Obh2 + Och2) / h ** 2
     Or = (2.469e-5) * (h ** (-2.0)) * (1.0 + ((7.0 / 8.0) * (4.0 / 11.0) ** (4.0 / 3.0)) * 3.046)
-
     return H0*np.sqrt((Om*(a)**(-3) + Or*(a)**(-4) + 1.0 - Om - Or))
 
 
@@ -63,18 +62,18 @@ def model(z, H0, Obh2, Och2):
 @jit
 def rs(a, H0, Obh2, Och2):
     aa = np.concatenate(
-        (np.logspace(np.log10(1. / (1. + Z_MAX)), np.log10(0.7), N_INTERP),
+        (np.logspace(np.log10(1e-14), np.log10(0.7), N_INTERP),
          np.logspace(np.log10(0.71), 0., N_INTERP)))
 
     Ob = Obh2* (100.0/H0)**(2.0)
     Og = 2.469e-5 * (100.0/H0)**(2.0)
 
-    R = (3.0 * Ob) / (4.0 * Og * aa)
+    R = (3.0 * Ob) / (4.0 * Og / aa)
     cs = light_speed / np.sqrt(3.0 * (1.0 + R)) / aa / aa
     integ =cs/H(aa, H0, Obh2, Och2)
 
 
-    intchi = -cumtrapz(integ[::-1], aa[::-1], initial=0.)[::-1]
+    intchi = cumtrapz(integ, aa, initial=0.)
 
     interp_intchi = interp1d(aa, intchi, kind='linear', bounds_error=False)
 
@@ -107,7 +106,7 @@ def ang_quad(z, H0, Obh2, Och2):
     b1 = 0.313 * (Obh2 + Och2) ** (-0.419) * (1.0 + 0.607 * (Obh2 + Och2) ** (0.674))
     b2 = 0.238 * (Obh2 + Och2) ** (0.223)
 
-    zd = (1291.0 * (Obh2 + Och2) ** (0.251) * (1.0 + b1 * (Obh2) ** (b2))) / (
+    zd = (1345.0 * (Obh2 + Och2) ** (0.251) * (1.0 + b1 * (Obh2) ** (b2))) / (
 		1.0 + 0.659 * (Obh2 + Och2) ** (0.828))
 
     return rss(zd,H0, Obh2, Och2)/((1.0+z)*DA(z,H0, Obh2, Och2))
@@ -119,7 +118,7 @@ def ang(z, H0, Obh2, Och2):
     b1 = 0.313 * (Obh2 + Och2) ** (-0.419) * (1.0 + 0.607 * (Obh2 + Och2) ** (0.674))
     b2 = 0.238 * (Obh2 + Och2) ** (0.223)
 
-    zd = (1291.0 * (Obh2 + Och2) ** (0.251) * (1.0 + b1 * (Obh2) ** (b2))) / (
+    zd = (1345.0 * (Obh2 + Och2) ** (0.251) * (1.0 + b1 * (Obh2) ** (b2))) / (
 		1.0 + 0.659 * (Obh2 + Och2) ** (0.828))
     ad = 1.0/(1.0+zd)
 
