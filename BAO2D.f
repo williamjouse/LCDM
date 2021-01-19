@@ -14,7 +14,7 @@ Cf2py  intent(out) ang
         b1 = 0.313 * (Obh2 + Och2) ** (-0.419) * (1.0 + 0.607 * (Obh2 
      &  + Och2) ** (0.674))
         b2 = 0.238 * (Obh2 + Och2) ** (0.223)
-        zd = (1291.0 * (Obh2 + Och2) ** (0.251) * (1.0 + 
+        zd = (1345.0 * (Obh2 + Och2) ** (0.251) * (1.0 + 
      &   b1 * (Obh2)**(b2)))/(1.0 + 0.659 * (Obh2 + Och2) ** (0.828))
         ad = 1.0/(1.0+zd)
 
@@ -32,15 +32,19 @@ Cf2py  intent(out) ang
 
 
         real*8 function fun(a, H0, Obh2, Och2)
-        real*8 y,a,H0, Obh2, Och2,model,Og,R,cs,light_speed
+        real*8 y,a,H0,Obh2,Och2,model,R
+	real*8 h,Og,Ob,cs,light_speed
         external model
 
 	light_speed = 299792.4580
-        Og=2.469d-5*(100.0/H0)**2.0
+	h = H0/100.0
+        Og = 2.469d-5/h**2.0
+	Ob = Obh2/h**2.0
+	
         y = 1.0 / a - 1.0
 	
 
-        R=(3.0*Obh2*(100.0/H0)**2)/(4.0*Og*a)
+        R=(3.0*Ob)/(4.0*Og/a)
         cs=light_speed/(sqrt(3.0*(1.0+R)))/a/a
         fun = cs*model(y, H0, Obh2, Och2)
         
