@@ -1,4 +1,4 @@
-        subroutine mu_teo_f2py(zcmb, zhel, H0, Obh2, Och2, mu)
+        subroutine mu_teo_f2py(zhel, zcmb, H0, Obh2, Och2, mu)
         real*8 zcmb(2000), zhel(2000), H0, Obh2, Och2, mu(2000)
         real*8 intval,model, light_speed, DL(2000)
         integer i
