@@ -18,7 +18,7 @@ Cf2py  intent(out) ang
      &   b1 * (Obh2)**(b2)))/(1.0 + 0.659 * (Obh2 + Och2) ** (0.828))
         ad = 1.0/(1.0+zd)
 
-        call QLEG(fun, 0.d0, ad, H0, Obh2, Och2, rs)
+        call QLEG(fun, 1.d-14, ad, H0, Obh2, Och2, rs)
 
         do i=1,2000
         call QLEG(model,0.d0,zbao(i), H0, Obh2, Och2,intval)
