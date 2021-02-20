@@ -1,14 +1,4 @@
 # LCDM
 This repository contains the codes to analyze the LambdaCDM model using the scipy.integrate.cumtrapz, scipy.integrate.quad and F2py implementations.
 
-The statistical analysis is achieved using pymultinest and confidence levels are obtained from Getdist.
-
-In the code LCDM-SN.py is plotted the distance modulus using scipy.integrate.cumtrapz, scipy.integrate.quad and F2py implementations. The data considered were Patheon Sample. For F2py implementation, see the file SN.f.
-
-In LCDM-BAO.py is the same as the previous one, but now is plotted the BAO angular scale measurements. For F2py implementation, see the file BAO2D.f.
-
-
-
-
-
-
+The statistical analysis is achieved using pymultinest and confidence levels are obtained from Getdist, see the statistical-codes directory. We ran the code five times for SNeIa and BAO2D. The results, parameter mean/error, and Bayesian evidence are in a folder named chains, and the time run we show in the time.txt file. 
