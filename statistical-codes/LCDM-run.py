@@ -154,7 +154,7 @@ def ang(z, H0, Obh2, Och2):
     return rs(ad, H0, Obh2, Och2)/chi(a, H0, Obh2, Och2)
 
 
-@jit
+@jit 
 def X2SN_cumtrapz(H0, Obh2, Och2):
     I = np.ones(1048)
     m_teo = 5.0*np.log10(DLz(zhel, zcmb, H0, Obh2, Och2))
@@ -202,8 +202,8 @@ def X2B2_f2py(H0, Obh2, Och2):
 
 @jit
 def prior(cube,ndim,nparams):
-    cube[0] = Priors().GaussianPrior(cube[0], 74.03, 1.42)
-    cube[1] = Priors().GaussianPrior(cube[1], 0.02235, 0.00016) 
+    cube[0] = Priors().GaussianPrior(cube[0], 74.03, 1.42) #H0 Local measurement 
+    cube[1] = Priors().GaussianPrior(cube[1], 0.02235, 0.00016) #BBN measurement
     cube[2] = Priors().UniformPrior(cube[2], 0.001, 0.99)
 
 
