@@ -22,9 +22,9 @@ g = plots.getSinglePlotter()
 g.triangle_plot([chains1, chains2, chains3], ['H0', 'Om'], ['cumtrapz', 'F2py', 'quad'], filled=[True])
 g.export('figures/SN-conf.pdf')
 
-#print(chains1.getTable().tableTex())
-#print(chains2.getTable().tableTex())
-#print(chains3.getTable().tableTex())
+for chains in [chains11, chains22, chains33]:
+	result = chains.getTable(limit=1).tableTex()
+	print('SNeIa results', result)
 
 chains11 = loadMCSamples('chains/BAO/cumtrapz-run')
 chains22 = loadMCSamples('chains/BAO/f2py-run')
@@ -39,12 +39,10 @@ g = plots.getSinglePlotter()
 g.triangle_plot([chains11, chains22, chains33], ['H0', 'Om'], ['cumtrapz', 'F2py', 'quad'], filled=[True])
 g.export('figures/BAO-conf.pdf')
 
-#print(chains1.getTable().tableTex())
-#print(chains2.getTable().tableTex())
-#print(chains3.getTable().tableTex())
-
 plt.show()
 
-
+for chains in [chains11, chains22, chains33]:
+	result = chains.getTable(limit=1).tableTex()
+	print('BAO results', result)
 
 
